@@ -16,7 +16,34 @@ class BinarySearchTree {
   }
 
   insert(key, value = true) {
-    // TODO
+    const insertIndividualNode = (currNode, newNode) => {
+      if (newNode.key === currNode.key) {
+        currNode.value = newNode.value
+      } else if (newNode.key < currNode.key){
+        if (!currNode.left){
+          currNode.left = newNode;
+          this._count += 1;
+        } else {
+          insertIndividualNode(currNode.left, newNode)
+        }
+      } else {
+        if (!currNode.right){
+          currNode.right = newNode;
+          this._count += 1;
+        } else {
+          insertIndividualNode(currNode.right, newNode)
+        }
+      }
+    }
+
+    const node = new this.Node({ key, value });
+
+    if (!this._root) {
+      this._root = node;
+      this._count += 1;
+    } else {
+      insertIndividualNode(this._root, node);
+    }
   }
 
   lookup(key) {

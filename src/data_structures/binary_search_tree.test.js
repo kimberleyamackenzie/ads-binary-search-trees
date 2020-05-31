@@ -104,15 +104,45 @@ dataStructures.forEach(TargetDS => {
 
     describe('delete', () => {
       it('returns the value for the removed record', () => {
+        const records = [
+          { key: 'one', value: 'first' },
+          { key: 'two', value: 'second' },
+          { key: 'three', value: 'third' },
+          { key: 'four', value: 'fourth' },
+          { key: 'five', value: 'fifth' },
+        ];
 
+        records.forEach(({ key, value }) => {
+          bst.insert(key, value);
+        });
+
+        records.forEach(({ key, value }) => {
+          expect(bst.delete(key)).toBe(value);
+        });
       });
 
       it('returns undefined if the record was not found', () => {
-
+        expect(bst.delete(key)).toBe(undefined);
       });
 
       it('reduces the count by 1', () => {
+        const records = [
+          { key: 'one', value: 'first' },
+          { key: 'two', value: 'second' },
+          { key: 'three', value: 'third' },
+          { key: 'four', value: 'fourth' },
+          { key: 'five', value: 'fifth' },
+        ];
 
+        records.forEach(({ key, value }) => {
+          bst.insert(key, value);
+        });
+
+        const count = bst.count()
+
+        bst.delete('one');
+
+        expect(bst.count()).toBe(count - 1);
       });
 
       it('omits the removed record from iteration results', () => {
@@ -120,7 +150,23 @@ dataStructures.forEach(TargetDS => {
       });
 
       it('can remove every element in a tree', () => {
+        const records = [
+          { key: 'one', value: 'first' },
+          { key: 'two', value: 'second' },
+          { key: 'three', value: 'third' },
+          { key: 'four', value: 'fourth' },
+          { key: 'five', value: 'fifth' },
+        ];
 
+        records.forEach(({ key, value }) => {
+          bst.insert(key, value);
+        });
+
+        records.forEach(({ key, value }) => {
+          bst.delete(key);
+        });
+
+        expect(bst.count()).toBe(0);
       });
 
       describe('scenarios', () => {
@@ -129,38 +175,90 @@ dataStructures.forEach(TargetDS => {
         // of how insert works to do this? How can you check your work?
 
         it('can remove the record with the smallest key', () => {
-          // TODO:
           // Insert several records
-          // Remove the record with the smallest key
-          // Ensure that looking up that key returns undefined
+          const records = [
+            { key: 6 },
+            { key: 2 },
+            { key: 9 },
+            { key: 4 },
+            { key: 1 },
+          ];
+
+          records.forEach(({ key }) => {
+            bst.insert(key);
+          });
+
+          expect(bst.delete(1)).toBe(true);
+          expect(bst.lookup(1).toBe(undefined));
         });
 
         it('can remove the record with the largest key', () => {
+          const records = [
+            { key: 6 },
+            { key: 2 },
+            { key: 9 },
+            { key: 4 },
+            { key: 1 },
+          ];
 
+          records.forEach(({ key }) => {
+            bst.insert(key);
+          });
+
+
+          expect(bst.delete(6)).toBe(true);
+          expect(bst.lookup(6).toBe(undefined));
         });
 
         it('can remove the root', () => {
-
+          bst.insert('test');
+          expect(bst.lookup('test').toBe('test'));
+          expect(bst.delete('test')).toBe(true);
+          expect(bst.lookup('test').toBe(undefined));
         });
 
         it('can remove a node with no children', () => {
+          bst.insert({ key: 9 });
+          bst.insert({ key: 6 });
+          bst.insert({ key: 2 });
 
+          expect(bst.delete(2)).toBe(true);
+          expect(bst.lookup(2).toBe(undefined));
         });
 
         it('can remove a node with only a left child', () => {
+          bst.insert({ key: 9 });
+          bst.insert({ key: 2 });
 
+          expect(bst.delete(9)).toBe(true);
+          expect(bst.lookup(9).toBe(undefined));
         });
 
         it('can remove a node with only a right child', () => {
+          bst.insert({ key: 9 });
+          bst.insert({ key: 6 });
 
+          expect(bst.delete(9)).toBe(true);
+          expect(bst.lookup(9).toBe(undefined));
         });
 
         it('can remove a node with both children, where the successor is the node\'s right child', () => {
+          bst.insert({ key: 9 });
+          bst.insert({ key: 12 });
+          bst.insert({ key: 2 });
 
+          expect(bst.delete(9)).toBe(true);
+          expect(bst.lookup(9).toBe(undefined));
         });
 
         it('can remove a node with both children, where the successor is not the node\'s right child', () => {
+          bst.insert({ key: 9 });
+          bst.insert({ key: 8 });
+          bst.insert({ key: 13 });
+          bst.insert({ key: 10 });
 
+          expect(bst.delete(9)).toBe(true);
+          expect(bst.lookup(9).toBe(undefined));
         });
       });
     });

@@ -16,6 +16,7 @@ class BinarySearchTree {
   }
 
   insert(key, value = true) {
+    // Helper method
     const insertIndividualNode = (currNode, newNode) => {
       if (newNode.key === currNode.key) {
         currNode.value = newNode.value
@@ -36,6 +37,7 @@ class BinarySearchTree {
       }
     }
 
+    // Insert
     const node = new this.Node({ key, value });
 
     if (!this._root) {
@@ -61,7 +63,48 @@ class BinarySearchTree {
   }
 
   delete(key) {
-    // TODO (tests first!)
+
+    // Helper method
+    const deleteNode = (node, key) => {
+      // If the node doesn't exist, return undefined
+      if (!node){
+        return undefined;
+      // Go to left subtree if the key is less
+      } else if (key < node.key){
+        node.left = deleteNode(node.left, key);
+        return node;
+      // Go right subtree if the key is more
+      } else if (key > node.key) {
+        node.right = deleteNode(node.right, key);
+        return node;
+      // Otherwise, you've got a match, go forth and delete!
+      } else {
+        this._count -= 1;
+        // Handle node with no children
+        if (!node.left && !node.right){
+          node = null;
+          return node;
+        }
+        // Handle note with one child
+        if (!node.left){
+          node = node.right;
+          return node;
+        }
+        if (!node.right){
+          node = node.left;
+          return node;
+        }
+
+        return 'cats';
+        // Handle node with two children
+      }
+    }
+
+    // Delete
+    const deletedNodeValue = this.lookup(key);
+
+    this._root = deleteNode(this._root, key);
+    return deletedNodeValue;
   }
 
   count() {

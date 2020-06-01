@@ -107,9 +107,9 @@ dataStructures.forEach(TargetDS => {
         const records = [
           { key: 'one', value: 'first' },
           { key: 'two', value: 'second' },
-          // { key: 'three', value: 'third' },
-          // { key: 'four', value: 'fourth' },
-          // { key: 'five', value: 'fifth' },
+          { key: 'three', value: 'third' },
+          { key: 'four', value: 'fourth' },
+          { key: 'five', value: 'fifth' },
         ];
 
         records.forEach(({ key, value }) => {
@@ -125,9 +125,9 @@ dataStructures.forEach(TargetDS => {
         const records = [
           { key: 'one', value: 'first' },
           { key: 'two', value: 'second' },
-          // { key: 'three', value: 'third' },
-          // { key: 'four', value: 'fourth' },
-          // { key: 'five', value: 'fifth' },
+          { key: 'three', value: 'third' },
+          { key: 'four', value: 'fourth' },
+          { key: 'five', value: 'fifth' },
         ];
 
         records.forEach(({ key, value }) => {
@@ -164,10 +164,10 @@ dataStructures.forEach(TargetDS => {
       it('can remove every element in a tree', () => {
         const records = [
           { key: 'one', value: 'first' },
-          // { key: 'two', value: 'second' },
-          // { key: 'three', value: 'third' },
-          // { key: 'four', value: 'fourth' },
-          // { key: 'five', value: 'fifth' },
+          { key: 'two', value: 'second' },
+          { key: 'three', value: 'third' },
+          { key: 'four', value: 'fourth' },
+          { key: 'five', value: 'fifth' },
         ];
 
         records.forEach(({ key, value }) => {
@@ -191,9 +191,9 @@ dataStructures.forEach(TargetDS => {
           const records = [
             { key: 6 },
             { key: 2 },
-            // { key: 9 },
-            // { key: 4 },
-            // { key: 1 },
+            { key: 9 },
+            { key: 4 },
+            { key: 1 },
           ];
 
           records.forEach(({ key }) => {
